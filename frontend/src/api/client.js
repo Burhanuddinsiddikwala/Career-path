@@ -2,8 +2,8 @@ import axios from 'axios'
 
 // In development, default to local backend port 5000; in production, use VITE_API_URL or relative path for proxy
 const rawApiUrl = import.meta.env.VITE_API_URL
-const API_BASE = rawApiUrl !== undefined 
-  ? rawApiUrl 
+const API_BASE = (rawApiUrl && typeof rawApiUrl === 'string')
+  ? rawApiUrl.trim().replace(/\/+$/, '') 
   : (import.meta.env.DEV ? 'http://127.0.0.1:5000' : '')
 
 const api = axios.create({
