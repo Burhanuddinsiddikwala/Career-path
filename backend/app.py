@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import logging
 from pathlib import Path
@@ -24,11 +25,35 @@ load_dotenv(BASE_DIR / ".env")
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
-# CORS configuration supporting configured frontend origins (supports comma-separated list)
+# CORS configuration supporting configured frontend origins, production Vercel apps, and local dev
 frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
-configured_origins = [o.strip() for o in frontend_origin.split(",") if o.strip()]
-allowed_origins = list(set(configured_origins + ["http://127.0.0.1:5173", "http://localhost:5173", "http://localhost:80", "http://localhost"]))
-CORS(app, origins=allowed_origins, supports_credentials=True)
+raw_origins = [o.strip().rstrip("/") for o in frontend_origin.split(",") if o.strip()]
+
+default_origins = [
+    "https://career-path-six-gamma.vercel.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:80",
+    "http://localhost",
+    "http://127.0.0.1:80",
+    re.compile(r"^https://career-path-[a-zA-Z0-9\-_]+\.vercel\.app$")
+]
+
+allowed_origins = list(set(raw_origins + [o for o in default_origins if isinstance(o, str)])) + [o for o in default_origins if not isinstance(o, str)]
+
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": allowed_origins,
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
+            "allow_headers": ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+            "expose_headers": ["Content-Type", "Authorization"],
+            "supports_credentials": True,
+            "max_age": 86400
+        }
+    }
+)
 
 # Register Blueprints
 app.register_blueprint(auth_bp)

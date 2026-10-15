@@ -350,5 +350,61 @@ class BackendTestSuite(unittest.TestCase):
         self.assertEqual(p["learning_style"], "Hands-on Projects")
         self.assertEqual(p["portfolio_projects"], "CLI Task Manager in Python")
 
+    def test_17_cors_preflight_and_login_headers(self):
+        # 1. Test preflight OPTIONS on login from production Vercel domain
+        preflight_resp = self.client.options(
+            "/api/auth/login",
+            headers={
+                "Origin": "https://career-path-six-gamma.vercel.app",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type,Authorization"
+            }
+        )
+        self.assertEqual(preflight_resp.status_code, 200)
+        self.assertEqual(
+            preflight_resp.headers.get("Access-Control-Allow-Origin"),
+            "https://career-path-six-gamma.vercel.app"
+        )
+        self.assertIn("POST", preflight_resp.headers.get("Access-Control-Allow-Methods", ""))
+        self.assertIn("Authorization", preflight_resp.headers.get("Access-Control-Allow-Headers", ""))
+
+        # 2. Test actual login POST with CORS origin header
+        login_resp = self.client.post(
+            "/api/auth/login",
+            headers={"Origin": "https://career-path-six-gamma.vercel.app"},
+            json={"email": "alice@example.com", "password": "Password123!"}
+        )
+        self.assertEqual(login_resp.status_code, 200)
+        self.assertEqual(
+            login_resp.headers.get("Access-Control-Allow-Origin"),
+            "https://career-path-six-gamma.vercel.app"
+        )
+        self.assertIn("token", login_resp.get_json())
+
+        # 3. Test preflight from Vercel preview branch deployment (regex match)
+        preview_resp = self.client.options(
+            "/api/auth/login",
+            headers={
+                "Origin": "https://career-path-git-preview-test.vercel.app",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type"
+            }
+        )
+        self.assertEqual(preview_resp.status_code, 200)
+        self.assertEqual(
+            preview_resp.headers.get("Access-Control-Allow-Origin"),
+            "https://career-path-git-preview-test.vercel.app"
+        )
+
+        # 4. Test preflight from untrusted origin (should NOT receive Access-Control-Allow-Origin)
+        bad_origin_resp = self.client.options(
+            "/api/auth/login",
+            headers={
+                "Origin": "https://malicious-site.example.com",
+                "Access-Control-Request-Method": "POST"
+            }
+        )
+        self.assertIsNone(bad_origin_resp.headers.get("Access-Control-Allow-Origin"))
+
 if __name__ == "__main__":
     unittest.main()
