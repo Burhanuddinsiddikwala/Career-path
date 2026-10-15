@@ -55,15 +55,17 @@ def internal_error(e):
     app.logger.exception("Internal server error")
     return jsonify({"error": "An internal server error occurred. Please try again later."}), 500
 
-# Legacy endpoints maintained for backward compatibility
-@app.get("/api/health")
+# Health check endpoints for load balancers and monitoring
+@app.route("/", methods=["GET", "HEAD"])
+@app.route("/health", methods=["GET", "HEAD"])
+@app.route("/api/health", methods=["GET", "HEAD"])
 def health():
     return jsonify({
         "status": "ok",
         "service": "CareerPath AI API",
         "version": "1.0.0",
         "database": "connected"
-    })
+    }), 200
 
 @app.get("/api/jobs")
 def legacy_jobs():
@@ -133,7 +135,7 @@ def legacy_history():
 init_db()
 
 if __name__ == "__main__":
-    host = os.getenv("FLASK_HOST", "0.0.0.0" if os.getenv("FLASK_ENV") == "production" else "127.0.0.1")
+    host = os.getenv("FLASK_HOST", "0.0.0.0" if (os.getenv("PORT") or os.getenv("FLASK_ENV") == "production") else "127.0.0.1")
     port = int(os.getenv("PORT", os.getenv("FLASK_PORT", "5000")))
     debug = os.getenv("FLASK_DEBUG", "0") == "1"
     app.run(host=host, port=port, debug=debug)
