@@ -1,0 +1,15 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.venv
+venv
+ENV
+env
+.git
+.gitignore
+.env
+.env.local
+.DS_Store
+*.db
+!data/jobs.json

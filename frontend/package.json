@@ -1,0 +1,31 @@
+{
+  "name": "careerpath-ai-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "latest",
+    "axios": "^1.20.0",
+    "gsap": "^3.15.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "^7.18.4",
+    "three": "^0.186.1",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-win32-x64-msvc": "^1.2.14"
+  }
+}

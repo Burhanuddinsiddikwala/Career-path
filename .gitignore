@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+ENV/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Environment configurations & secrets (NEVER COMMIT)
+.env
+**/.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Local SQLite databases & temporary journals
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+backend/careerpath.db
+backend/data/*.db
+
+# Python bytecode & test caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs, test artifacts & scratch scripts
+*.log
+scratch/
+test-results/
+playwright-report/
+
+# OS & IDE directories
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

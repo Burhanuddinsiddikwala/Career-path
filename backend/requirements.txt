@@ -1,0 +1,8 @@
+Flask>=3.1,<4
+Flask-Cors>=5,<7
+scikit-learn>=1.5,<2
+numpy>=1.26,<3
+python-dotenv>=1.0,<2
+pyjwt>=2.8,<3
+requests>=2.31,<3
+gunicorn>=21.2.0; sys_platform != 'win32'

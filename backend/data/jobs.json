@@ -1,0 +1,148 @@
+[
+  {
+    "id": "data-analyst",
+    "title": "Junior Data Analyst",
+    "company": "Sample role catalogue",
+    "location": "Remote / Hybrid",
+    "summary": "Analyze datasets, prepare reports, clean data and communicate insights to teams.",
+    "skills": [
+      "Python",
+      "SQL",
+      "Excel",
+      "Data Visualization",
+      "Statistics",
+      "Pandas"
+    ],
+    "learning": [
+      "Practice SQL joins and aggregations",
+      "Complete a data-cleaning project with Pandas",
+      "Build a dashboard from a public dataset"
+    ],
+    "resources": [
+      {
+        "label": "Python tutorial",
+        "url": "https://docs.python.org/3/tutorial/"
+      },
+      {
+        "label": "Pandas getting started",
+        "url": "https://pandas.pydata.org/docs/getting_started/index.html"
+      }
+    ]
+  },
+  {
+    "id": "frontend-dev",
+    "title": "Junior Frontend Developer",
+    "company": "Sample role catalogue",
+    "location": "Remote / Hybrid",
+    "summary": "Build responsive web interfaces, connect APIs and maintain accessible UI components.",
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Git",
+      "REST APIs"
+    ],
+    "learning": [
+      "Build a responsive multi-page React app",
+      "Connect a frontend to a REST API",
+      "Practice Git branches and pull requests"
+    ],
+    "resources": [
+      {
+        "label": "React learn",
+        "url": "https://react.dev/learn"
+      },
+      {
+        "label": "MDN web development",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn"
+      }
+    ]
+  },
+  {
+    "id": "python-dev",
+    "title": "Junior Python Developer",
+    "company": "Sample role catalogue",
+    "location": "Remote / Hybrid",
+    "summary": "Write maintainable Python, build APIs, work with databases and test application logic.",
+    "skills": [
+      "Python",
+      "Flask",
+      "REST APIs",
+      "SQL",
+      "Git",
+      "Testing"
+    ],
+    "learning": [
+      "Build a Flask CRUD API",
+      "Add SQLite persistence and validation",
+      "Write unit tests for API endpoints"
+    ],
+    "resources": [
+      {
+        "label": "Python tutorial",
+        "url": "https://docs.python.org/3/tutorial/"
+      },
+      {
+        "label": "Flask quickstart",
+        "url": "https://flask.palletsprojects.com/en/stable/quickstart/"
+      }
+    ]
+  },
+  {
+    "id": "ml-intern",
+    "title": "Machine Learning Intern",
+    "company": "Sample role catalogue",
+    "location": "Remote / Hybrid",
+    "summary": "Prepare data, train baseline models, evaluate results and document ML experiments.",
+    "skills": [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Statistics",
+      "Model Evaluation"
+    ],
+    "learning": [
+      "Train and evaluate a classification baseline",
+      "Document precision, recall and limitations",
+      "Create a reproducible notebook or script"
+    ],
+    "resources": [
+      {
+        "label": "scikit-learn user guide",
+        "url": "https://scikit-learn.org/stable/user_guide.html"
+      },
+      {
+        "label": "Pandas getting started",
+        "url": "https://pandas.pydata.org/docs/getting_started/index.html"
+      }
+    ]
+  },
+  {
+    "id": "uiux-designer",
+    "title": "Junior UI/UX Designer",
+    "company": "Sample role catalogue",
+    "location": "Remote / Hybrid",
+    "summary": "Research user needs, create wireframes and prototypes, and test interface usability.",
+    "skills": [
+      "Figma",
+      "User Research",
+      "Wireframing",
+      "Prototyping",
+      "Accessibility",
+      "Design Systems"
+    ],
+    "learning": [
+      "Create a user flow and low-fidelity wireframes",
+      "Prototype a core user journey",
+      "Run a small usability test and document findings"
+    ],
+    "resources": [
+      {
+        "label": "Figma learn",
+        "url": "https://help.figma.com/hc/en-us/categories/360002051613-Get-started"
+      }
+    ]
+  }
+]

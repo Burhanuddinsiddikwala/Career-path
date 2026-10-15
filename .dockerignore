@@ -1,0 +1,13 @@
+.venv
+venv
+node_modules
+dist
+__pycache__
+*.pyc
+*.db
+!backend/data/jobs.json
+.git
+.gitignore
+.env
+.env.local
+.DS_Store
