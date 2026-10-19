@@ -1,225 +1,343 @@
-# CareerPath AI — AI-Powered Career Exploration & Job Readiness Platform
+# CareerPath AI
 
-CareerPath AI is a modern full-stack web platform designed to help students, recent graduates, and career changers navigate their career journeys. It combines transparent skill-based matching, prioritized skill-gap analysis, personalized 30-day learning roadmaps, an interactive learning schedule, and a context-aware AI career coaching assistant.
+### Find Your Direction. Build Your Skills. Shape Your Future.
 
-Aligned with **UN Sustainable Development Goal 8 (Decent Work and Economic Growth)**.
+**CareerPath AI** is an AI-powered career intelligence platform designed to help students and aspiring professionals explore career opportunities, understand skill gaps, and build structured learning roadmaps toward their career goals.
 
----
+Rather than leaving users overwhelmed by endless career options and disconnected learning resources, CareerPath AI brings career discovery, skill alignment, personalized planning, and AI-assisted guidance into one platform.
 
-## 1. Executive Summary & Core Objectives
-
-### The Problem
-Early-career candidates and transitioning professionals often face information overload:
-- Unclear technical requirements across rapidly shifting tech roles.
-- Ambiguity regarding which missing skills to prioritize for maximum impact.
-- Generic online courses that fail to deliver verifiable portfolio proof.
-- Lack of personalized, contextual guidance during interview and application preparation.
-
-### The Solution
-CareerPath AI replaces guesswork with a transparent career intelligence engine:
-1. **Explainable Role Alignment**: Matches user skill profiles against 12+ benchmark industry roles with documented formulas (never masquerading similarity as an employment guarantee).
-2. **Prioritized Skill-Gap Analysis**: Highlights exactly which core competencies are missing and recommends practical portfolio milestones.
-3. **Personalized Learning Roadmaps**: Generates ordered, persistent study milestones linked to verified educational documentation (Python, React.dev, MDN, OWASP).
-4. **Context-Aware AI Assistant**: A dual-mode coaching system that incorporates user profile context to answer questions on interview preparation, resume tuning (Google XYZ formula), and networking outreach.
+<p align="center">
+  <a href="https://career-path-six-gamma.vercel.app/">
+    <strong>🌐 Live Application</strong>
+  </a>
+  &nbsp; · &nbsp;
+  <a href="https://github.com/Burhanuddinsiddikwala/Career-path">
+    <strong>📂 Source Code</strong>
+  </a>
+</p>
 
 ---
 
-## 2. Technology Stack
+## ✨ Key Features
+
+| Feature | Description |
+|---|---|
+| 🧭 **Career Discovery** | Explore career opportunities and understand potential professional directions. |
+| 🎯 **Skill Alignment** | Compare your existing competencies with the skills associated with your career goals. |
+| 📚 **Career Catalogue** | Discover career options and explore the skills and requirements associated with them. |
+| 🗺️ **Personalized Roadmaps** | Organize your learning journey into structured steps toward a target career. |
+| 🤖 **AI Career Assistant** | Get career-related guidance and assistance through the application's AI capabilities. |
+| 👤 **User Authentication** | Access the application through account registration and sign-in. |
+| 📈 **Career Development** | Bring career exploration, competency development, and learning plans into one workflow. |
+
+## 🖥️ Application Preview
+
+Explore the live application to experience its interface and career-planning workflow.
+
+**Live demo:** [CareerPath AI](https://career-path-six-gamma.vercel.app/)
+
+<p align="center">
+  <img src="./preview.png" alt="CareerPath AI application preview" width="100%" />
+</p>
+
+---
+
+## 🛠️ Technology Stack
+
+CareerPath AI uses a full-stack architecture that separates the user interface, backend services, and data storage.
 
 ### Frontend
-- **Framework**: React 19 + Vite 8
-- **Styling**: Tailwind CSS + Custom Pastel Lavender SaaS Design Identity
-- **Routing**: React Router 7 (`react-router-dom`)
-- **Icons**: Lucide React
-- **HTTP Client**: Axios (with Bearer JWT injection interceptors)
-- **Typography**: DM Sans & Manrope (Google Fonts)
+
+- **React 19** — Component-based user interface.
+- **Vite** — Development server and production build tooling.
+- **Tailwind CSS** — Utility-first interface styling.
+- **JavaScript** — Application logic and client-side interactions.
 
 ### Backend
-- **Framework**: Python 3.11 / 3.14 + Flask 3.1
-- **Cross-Origin**: Flask-CORS 6.0
-- **Database**: SQLite with `PRAGMA foreign_keys = ON;` and parameterized queries
-- **Authentication**: PBKDF2/scrypt password hashing (`werkzeug.security`) + HS256 JWT tokens (`pyjwt`)
-- **Machine Learning & NLP**: Scikit-learn (TF-IDF vectorizer + Cosine Similarity) + NumPy
 
-### AI Architecture
-- **Local Generative Model**: Compatible with local inference providers (such as **Ollama**) hosting models like `llama3.2`, `mistral`, or `qwen2.5`.
-- **Context-Aware Local Coach Fallback**: A robust, zero-cost, offline coaching engine that inspects user skills, goals, target roles, and roadmap tasks to synthesize structured, intent-driven guidance (career matching, skill gap, 30-day plans, resume advice, interview questions, networking templates).
-- **Transparency**: Live status endpoint (`/api/chat/status`) that discloses the active operating mode.
+- **Python** — Backend application logic.
+- **Flask** — REST API and server-side application services.
+- **Gunicorn** — Production WSGI server for deployment.
+
+### Data and AI
+
+- **SQLite** — Relational data storage.
+- **Gemini integration** — AI-assisted functionality when the provider is configured.
+- **Fallback logic** — Rule-based or heuristic responses where supported by the application, helping provide graceful behavior when an external AI provider is unavailable.
+
+### Deployment and Development
+
+- **Vercel** — Frontend hosting.
+- **Render** — Backend hosting.
+- **Git and GitHub** — Version control and source-code management.
 
 ---
 
-## 3. System Architecture
+## 🏗️ System Architecture
 
+The application follows a frontend–backend architecture.
+
+```text
+┌──────────────────────────────┐
+│           User               │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│       React + Vite           │
+│       Frontend on Vercel     │
+└──────────────┬───────────────┘
+               │ HTTPS / REST API
+               ▼
+┌──────────────────────────────┐
+│         Flask API            │
+│       Backend on Render      │
+└────────┬─────────────┬───────┘
+         │             │
+         ▼             ▼
+┌────────────────┐  ┌────────────────┐
+│  SQLite        │  │  AI Services    │
+│  Data Storage  │  │  + Fallbacks    │
+└────────────────┘  └────────────────┘
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Client Layer                           │
-│  React 19 + React Router 7 + Lucide React + Tailwind CSS     │
-│  (Landing, Dashboard, Careers, Skills, Jobs, Roadmap, Chat)  │
-└──────────────────────────────┬──────────────────────────────┘
-                               │ HTTPS / JSON (REST API)
-┌──────────────────────────────▼──────────────────────────────┐
-│                    Flask 3.1 API Layer                      │
-│  ├── /api/auth          (Register, Login, Me, Password)     │
-│  ├── /api/profile       (Profile details, Onboarding, %)    │
-│  ├── /api/skills        (User Skills CRUD, Suggestions)     │
-│  ├── /api/careers       (Role catalogue, Matching, Gaps)    │
-│  ├── /api/roadmap       (Tasks CRUD, Roadmap Generator)     │
-│  ├── /api/calendar      (Schedule & Date Milestones)        │
-│  ├── /api/networking    (Contacts CRUD, Outreach Templates) │
-│  ├── /api/chat          (Threads, Messages, AI Status)      │
-│  └── /api/search        (Global real-time search)           │
-└──────────────┬──────────────────────────────┬───────────────┘
-               │                              │
-┌──────────────▼──────────────┐┌──────────────▼───────────────┐
-│     SQLite Database         ││       AI Service Engine      │
-│  ├── users & user_profiles  ││  ├── Ollama Local LLM API    │
-│  ├── user_skills            ││  │   (llama3.2 / mistral)    │
-│  ├── career_roles           ││  ├── Context-Aware Offline   │
-│  ├── saved_careers          ││  │   Career Coaching Engine  │
-│  ├── learning_tasks         ││  └── Scikit-learn TF-IDF     │
-│  ├── networking_records     ││      Semantic Matcher        │
-│  └── conversations & msgs   │└──────────────────────────────┘
-└─────────────────────────────┘
-```
+
+### How it works
+
+1. Users interact with the React frontend to explore careers and manage their career-planning workflow.
+2. The frontend sends relevant requests to the Flask backend through the configured API URL.
+3. The backend processes requests and interacts with the database or available AI functionality as required.
+4. The application returns structured responses for the frontend to display.
+5. The frontend and backend can be deployed independently, allowing each layer to be maintained and updated separately.
 
 ---
 
-## 4. Database Schema (SQLite)
+## 🚀 Getting Started
 
-All tables use parameterized SQL queries with foreign keys enabled:
-
-1. `users`: User identity, email (unique), hashed password, full name, timestamps.
-2. `user_profiles`: Academic background, field of study, career stage, location preference, target role, goals, onboarding status.
-3. `user_skills`: User-owned competencies, proficiency (10–100%), category, years of experience.
-4. `career_roles`: Seeded catalogue of 12 benchmark roles with responsibilities, required skills, related skills, learning steps, and resources (stored as JSON arrays).
-5. `saved_careers`: Target roles bookmarked by the user with custom notes.
-6. `learning_tasks`: Personalized study milestones with status (`pending`/`completed`), priority, duration, target dates, and external resource links.
-7. `networking_records`: Professional contacts, organization, role title, outreach status, follow-up dates, and conversation notes.
-8. `conversations`: Persistent chat threads associated with the authenticated user.
-9. `conversation_messages`: Message history (role: `user`/`assistant`, content, metadata, action buttons).
-10. `notifications`: In-app event alerts with read status tracking.
-11. `match_history`: Audit log of career matching queries and scoring methods.
-
----
-
-## 5. Quick Start (Windows PowerShell)
+Follow these steps to run CareerPath AI locally.
 
 ### Prerequisites
-- Python 3.11+ (or Python 3.14)
-- Node.js 20.19+ or 22.12+ (LTS)
-- PowerShell (or Command Prompt)
 
-### Step 1: Clone & Open Terminal
-```powershell
-cd CareerPathAI_Starter
+Install the following before starting:
+
+- [Node.js](https://nodejs.org/) and npm
+- [Python](https://www.python.org/)
+- [Git](https://git-scm.com/)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Burhanuddinsiddikwala/Career-path.git
+cd Career-path
 ```
 
-### Step 2: Start the Backend API
-In your first terminal:
-```powershell
+### 2. Configure the backend
+
+Open a terminal in the project root:
+
+```bash
 cd backend
 python -m venv .venv
-.\.venv\Scripts\activate.ps1
-python -m pip install --upgrade pip
+```
+
+Activate the virtual environment.
+
+**Windows PowerShell:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+**Windows Command Prompt:**
+
+```cmd
+.venv\Scripts\activate.bat
+```
+
+Install the backend dependencies:
+
+```bash
 pip install -r requirements.txt
-Copy-Item .env.example .env
+```
+
+Configure the backend environment variables according to the project's `.env.example` or existing configuration instructions. Add an AI provider key only if required for the functionality you intend to use.
+
+Start the backend using the Flask entry point and startup command defined by the project. For example, if the application entry point is `app.py`:
+
+```bash
 python app.py
 ```
-> The Flask API will start at **http://127.0.0.1:5000**. Database tables and catalogue roles are seeded automatically.
 
-### Step 3: Start the Frontend UI
-In a second terminal:
-```powershell
+Use the actual entry point and port specified in the repository configuration.
+
+### 3. Configure the frontend
+
+Open a second terminal:
+
+```bash
 cd frontend
 npm install
+```
+
+Create a local `.env` file in the frontend directory:
+
+```env
+VITE_API_URL=http://127.0.0.1:5000
+```
+
+Replace the URL or port if your backend uses a different address. The variable must match the API configuration expected by the frontend.
+
+Start the development server:
+
+```bash
 npm run dev
 ```
-> Open your browser at **http://localhost:5173**.
 
----
+Open the local URL printed by Vite in your terminal.
 
-## 6. One-Click Batch Scripts (Windows)
-For convenience, helper scripts are provided in the repository root:
-- `start_backend.bat`: Launches the virtual environment and Flask API.
-- `start_frontend.bat`: Launches the Vite development server.
-- `run_tests.bat`: Runs all unit, integration, and evaluation test suites.
+### 4. Build for production
 
----
+From the frontend directory:
 
-## 7. Automated Testing Suite
-
-The repository includes comprehensive automated test suites:
-
-### 1. Backend Unit & API Tests
-Verifies 14 core backend requirements including authentication, password hashing, skill CRUD, career matching, roadmap generation, and cross-user data isolation:
-```powershell
-cd backend
-.\.venv\Scripts\activate.ps1
-python test_backend.py
-```
-
-### 2. End-to-End User Journey Simulation
-Simulates the complete user lifecycle: Registration → Onboarding → Skill Tuning → Career Matching → Role Saving → Roadmap Generation → Task Completion → Networking Hub → AI Chat Persistence → Session Reload → User Isolation:
-```powershell
-cd backend
-python test_e2e_journey.py
-```
-
-### 3. Career Matching Evaluation Harness
-Compares baseline skill overlap against semantic matching across representative benchmark profiles:
-```powershell
-cd backend
-python evaluate.py
-```
-
-### 4. Frontend Production Build Check
-```powershell
-cd frontend
+```bash
 npm run build
 ```
 
+Vite generates the production build in the `dist/` directory by default.
+
 ---
 
-## 8. Optional Local Generative AI Setup (Ollama)
+## 🔐 Environment Variables
 
-CareerPath AI functions 100% out-of-the-box using the built-in Context-Aware Career Coaching Engine without requiring an external model or API key.
+Keep credentials and API keys out of source control.
 
-To activate local generative language modeling:
-1. Download and install [Ollama](https://ollama.com/).
-2. Pull your desired model in a terminal:
-   ```powershell
-   ollama run llama3.2
+| Variable | Purpose |
+|---|---|
+| `VITE_API_URL` | Base URL used by the frontend to communicate with the backend. |
+| AI provider key | Enables the configured external AI integration, if required by the backend. |
+
+Use the exact environment-variable names referenced in the backend source code and deployment configuration. The AI provider's variable name should be taken from the actual implementation rather than guessed.
+
+**Security notes:**
+
+- Never commit `.env` files containing secrets.
+- Do not expose private API keys through `VITE_` variables. Vite-prefixed variables can be included in browser code.
+- Configure production secrets through the backend hosting provider's environment settings.
+- Ensure the deployed backend uses appropriate CORS rules and a persistent storage strategy for application data.
+
+---
+
+## ☁️ Deployment
+
+### Frontend — Vercel
+
+1. Import the GitHub repository into Vercel.
+2. Set the frontend project root to `frontend` if the repository uses that structure.
+3. Configure the build command as `npm run build`.
+4. Configure the output directory as `dist`.
+5. Set `VITE_API_URL` to the actual deployed backend URL.
+6. Deploy or redeploy the application after updating environment variables.
+
+### Backend — Render
+
+1. Create a Python web service connected to the GitHub repository.
+2. Configure the service root directory to `backend` if applicable.
+3. Install dependencies using the repository's requirements file.
+4. Configure the production startup command using the actual Flask entry point and Gunicorn configuration.
+5. Add the required backend environment variables.
+6. Configure CORS for the deployed frontend origin.
+7. Verify the health endpoint and API routes after deployment.
+8. Ensure database storage persists across service restarts and deployments.
+
+> **Important:** Deployment settings depend on the actual repository structure and hosting configuration. Verify the configured commands and paths before applying them. A successful frontend deployment alone does not establish that the backend or authentication flow is working.
+
+---
+
+## 🧪 Testing and Quality
+
+Before releasing changes, verify the following:
+
+- [ ] Frontend production build completes successfully.
+- [ ] Backend starts without runtime errors.
+- [ ] API health endpoint responds correctly, if configured.
+- [ ] User registration and login work with a valid test account.
+- [ ] Invalid credentials are rejected appropriately.
+- [ ] Frontend requests reach the correct backend.
+- [ ] Database initialization and persistence work as intended.
+- [ ] Career discovery, skill alignment, roadmaps, and AI assistance are regression-tested.
+- [ ] Secrets and local database files are excluded from Git.
+
+Run the test commands defined by the project and document any known limitations accurately.
+
+---
+
+## 🌱 Project Goals
+
+CareerPath AI aims to make career planning more structured and accessible by bringing together:
+
+- Career exploration and informed decision-making.
+- Skill awareness and competency development.
+- Step-by-step learning plans.
+- AI-assisted career guidance.
+- A unified digital experience for career development.
+
+The long-term goal is to help users move from *“I don't know where to start”* to a clearer, more actionable career-development plan.
+
+---
+
+## 🗺️ Future Improvements
+
+Potential directions for future development include:
+
+- Resume parsing and skill extraction.
+- More detailed skill-gap analysis.
+- Curated learning resources and certifications.
+- Progress tracking across roadmap milestones.
+- Expanded career and industry datasets.
+- Improved evaluation of AI-generated recommendations.
+- More comprehensive automated testing and observability.
+
+These are possible future enhancements, not claims that every feature is already implemented.
+
+---
+
+## 🤝 Contributing
+
+Contributions, feedback, and ideas are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+
+   ```bash
+   git checkout -b feature/your-feature
    ```
-3. Ensure Ollama is running at `http://127.0.0.1:11434`.
-4. In `backend/.env`, verify:
-   ```env
-   OLLAMA_BASE_URL=http://127.0.0.1:11434
-   OLLAMA_MODEL=llama3.2
+
+3. Commit your changes.
+
+   ```bash
+   git commit -m "Add: describe your change"
    ```
-5. CareerPath AI will automatically detect the local LLM and activate Generative Mode. Check `/api/chat/status` or the Settings page diagnostics panel to verify.
+
+4. Push the branch.
+
+   ```bash
+   git push origin feature/your-feature
+   ```
+
+5. Open a pull request describing the change and its testing.
 
 ---
 
-## 9. Public Deployment Guide
+## 📄 License
 
-### Deployment Topology
-- **Frontend**: Deploy to Vercel, Netlify, or Cloudflare Pages.
-  - Set `VITE_API_URL` to your production backend URL (e.g. `https://api.yourdomain.com`).
-- **Backend**: Deploy to Render, Railway, or Fly.io with a persistent volume.
-  - Set `FRONTEND_ORIGIN` to your production frontend URL (e.g. `https://yourdomain.com`).
-  - Set `JWT_SECRET_KEY` to a cryptographically secure random string (64+ characters).
-  - Mount a persistent disk for `careerpath.db` so user activity persists across restarts.
+No license is specified here. Add a `LICENSE` file and update this section once the project's intended license has been selected.
 
 ---
 
-## 10. Security & Ethical Disclaimers
-
-1. **Security**:
-   - Passwords hashed using PBKDF2/scrypt.
-   - JWT tokens signed with HS256 and subject to expiration.
-   - Server-side authorization enforced on every private endpoint (`user_id` is derived strictly from validated JWTs, preventing Insecure Direct Object References).
-2. **Ethical AI & Methodological Disclosure**:
-   - Match scores represent profile-to-role similarity calculated from curated benchmark descriptions.
-   - Match scores are **not** probabilities of employment and do not constitute hiring guarantees.
-   - Role descriptions represent standard industry benchmarks rather than live vacancies.
-   - Verified educational resource links direct users to official documentation (Python.org, React.dev, MDN, OWASP).
+<p align="center">
+  <strong>CareerPath AI</strong><br/>
+  Turning career uncertainty into a more structured journey.
+  <br/><br/>
+  <a href="https://career-path-six-gamma.vercel.app/">Live Application</a>
+  &nbsp; · &nbsp;
+  <a href="https://github.com/Burhanuddinsiddikwala/Career-path">GitHub Repository</a>
+</p>
